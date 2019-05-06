@@ -59,6 +59,7 @@ class MCAnalysis:
                 self._premap.append((re.compile(k.strip()+"$"), to))
         self.variationsFile = UncertaintyFile(options.variationsFile,options) if options.variationsFile else None
         self.readMca(samples,options)
+        if not len(self._allData): raise RuntimeError("No process selected. Check your command line options.")
 
     def readMca(self,samples,options,addExtras={}):
         field_previous = None
