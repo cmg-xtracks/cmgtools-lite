@@ -1,3 +1,5 @@
+import os.path
+
 from PhysicsTools.Heppy.analyzers.core.Analyzer import Analyzer
 from PhysicsTools.Heppy.analyzers.core.AutoHandle import AutoHandle
 from PhysicsTools.Heppy.physicsobjects.Electron import Electron
@@ -170,6 +172,21 @@ class isoTrackDeDxAnalyzer( Analyzer ):
             t.closestMu   = closest(t, nearby(t, muons, 0.4))
             t.closestEle  = closest(t, nearby(t, electrons, 0.4))
             t.closestTau  = closest(t, nearby(t, event.selectedTaus, 0.4))
+            
+            t.dedxByHit           = [0 for i in xrange(14)]
+            t.deByHit             = [0 for i in xrange(14)]
+            t.dxByHit             = [0 for i in xrange(14)]
+            t.dedxUnSmearedByHit  = [0 for i in xrange(14)]    # unsmeared dedx. For MC the dedx is smeared according to data/mc discrepancy, but the unsmeared is kept for future use
+            t.subDetIdByHit       = [0 for i in xrange(14)]
+            t.pixByHit            = [0 for i in xrange(14)]    # 0 = strips, 1 = bpix, 2 = fpix
+            t.layerOrSideByHit    = [0 for i in xrange(14)]
+            t.ladderOrBladeByHit  = [0 for i in xrange(14)]
+            t.diskByHit           = [0 for i in xrange(14)]
+            t.sideByHit           = [0 for i in xrange(14)]
+            t.moduleByHit         = [0 for i in xrange(14)]
+            t.sizeXbyHit          = [0 for i in xrange(14)]
+            t.sizeYbyHit          = [0 for i in xrange(14)]
+            
             # get dedx
             if self.cfg_ana.doDeDx:
                 ref = getDeDxRef(t.index)

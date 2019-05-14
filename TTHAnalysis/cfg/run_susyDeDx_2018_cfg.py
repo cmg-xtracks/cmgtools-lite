@@ -64,11 +64,12 @@ VV  = [ WW,
       ]
 
 Zll = [
-    DYJetsM50_HT100to200,  
-    DYJetsM50_HT200to400,  
-    DYJetsM50_HT400to600,  
-    DYJetsM50_HT600to800,
-    DYJetsM50_HT800to1200,
+    DYJetsToLL_M50_HT100to200
+    #DYJetsM50_HT100to200,  
+    #DYJetsM50_HT200to400,  
+    #DYJetsM50_HT400to600,  
+    #DYJetsM50_HT600to800,
+    #DYJetsM50_HT800to1200,
     #DYJetsM50_HT1200to2500,
     #DYJetsM50_HT2500toInf,
 ]
@@ -113,7 +114,11 @@ for c in mcSamples + mcSignals:
     c.triggers = mcTriggers
 
 ## Data
-from CMGTools.RootTools.samples.samples_13TeV_DATA2018 import *
+#from CMGTools.RootTools.samples.samples_13TeV_DATA2018 import *   # FIXME
+from CMGTools.RootTools.samples.samples_13TeV_DATA2018_MiniAOD import *   # FIXME
+#/afs/cern.ch/work/a/amassiro/CMG/DisappearingTracks/1May2019/CMSSW_10_4_0/src/CMGTools/RootTools/python/samples/samples_13TeV_DATA2018_MiniAOD.py
+
+
 if region == "sr":   
     datasetsAndTriggers = [ ("MET", triggers_SOS_highMET) ]
 elif region == "cr1l":   
@@ -124,7 +129,8 @@ elif region == "cr1l":
 json = '/afs/cern.ch/cms/CAF/CMSCOMM/COMM_DQM/certification/Collisions18/13TeV/PromptReco/Cert_314472-325175_13TeV_PromptReco_Collisions18_JSON.txt'
 dataSamples = []; vetoTriggers = []
 for (pdname, trigs) in datasetsAndTriggers:
-    for d in dataSamples_1Apr2019:
+    for d in dataSamples_17Sep2018_plus_Prompt:
+    #for d in dataSamples_1Apr2019:
         if pdname in d.name:
             d.json = json
             d.triggers = trigs[:]
